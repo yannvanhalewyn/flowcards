@@ -1,5 +1,6 @@
 import { map } from "ramda";
 import { isLoading, isSuccess } from "../remote/events";
+import { DashedHeading } from "../Typography";
 
 const Flashcard = ({ id, prompt, solution }) => {
   return (
@@ -16,8 +17,7 @@ const Flashcards = ({ flashcards, status, dispatch }) => {
   } else if (isSuccess(status)) {
     return (
       <div className="mt-4">
-        <h1 className="font-bold text-xl mb-2 text-center">Study your cards</h1>
-        <hr className="mb-4 border-2 border-dashed border-yellow-200"/>
+        <DashedHeading>Study your cards</DashedHeading>
         <ul>{map(Flashcard, flashcards)}</ul>
         <div className="text-center mt-4">
           <button className="btn btn--blue mx-auto"

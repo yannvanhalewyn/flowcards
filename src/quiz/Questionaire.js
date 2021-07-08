@@ -3,6 +3,7 @@ import React from "react";
 import Icon from "@mdi/react";
 import { mdiCloseThick, mdiCheck, mdiCheckBold } from "@mdi/js";
 import { prop, path } from "ramda";
+
 import * as Quiz from "./model.js";
 import * as Flashcard from "../flashcard/model.js";
 

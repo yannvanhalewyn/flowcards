@@ -47,7 +47,7 @@ const App = () => {
   const [flashcardsById, status] = getData(state, flashcardsLoader);
 
   return (
-    <div className="px-4 pb-4">
+    <div className="px-4 pb-4 max-w-4xl mx-auto">
       <Header />
       {state.currentQuiz ? (
         <Quiz

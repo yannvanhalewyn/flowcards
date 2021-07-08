@@ -3,6 +3,7 @@ import { map, isEmpty } from "ramda";
 import Questionaire from "./Questionaire";
 import { AnswerReport } from "./Questionaire";
 import * as Quiz from "./model.js";
+import { DashedHeading } from "../Typography";
 
 const ErrorLine = (error) => {
   return (
@@ -48,9 +49,19 @@ const QuizComponent = (props) => {
   const { currentQuiz } = props;
 
   if (currentQuiz.isFinished) {
-    return <QuizReport {...props} />;
+    return (
+      <div className="mt-4">
+        <DashedHeading>See your results</DashedHeading>
+        <QuizReport {...props} />
+      </div>
+    );
   }
-  return <Questionaire {...props} />;
+  return (
+    <div className="mt-4">
+      <DashedHeading>Take the quiz</DashedHeading>
+      <Questionaire {...props} />;
+    </div>
+  );
 };
 
 export default QuizComponent;
