@@ -6,6 +6,9 @@ import * as Quiz from "./model";
 import * as QuizEvents from "./events"
 import { DashedHeading } from "../Typography";
 
+/*
+ * Displays a mistake the user made during the quiz on the final report.
+ */
 const ErrorLine = (error) => {
   return (
     <li key={error.id} className="mt-6 border-l-4 pl-4 border-yellow-300">
@@ -17,6 +20,9 @@ const ErrorLine = (error) => {
   );
 };
 
+/*
+ * After completing a quiz renders the score and any errors made.
+ */
 const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
   const report = Quiz.report(currentQuiz, flashcardsById);
   const [num, denom] = report.score;
@@ -46,6 +52,9 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
   );
 };
 
+/*
+ * The main quiz component with questionnaire and report.
+ */
 const QuizComponent = (props) => {
   const { currentQuiz } = props;
 

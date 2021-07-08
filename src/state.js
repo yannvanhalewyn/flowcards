@@ -2,18 +2,12 @@ import { prop, mergeAll } from "ramda";
 import { reducers as remoteReducers } from "./remote/events";
 import { reducers as quizReducers } from "./quiz/events";
 
-// APP STATE:
-// userFlashcards: { "uuid": "flashcard" }
-//
-// currentQuiz: {
-//   questions: ["uuid", "uuid"]
-//   answers: {
-//     "uuid": "answer"
-//   }
-// }
-
 const allReducers = mergeAll([remoteReducers, quizReducers]);
 
+/*
+ * The main 'reducer'. Combines all reducers found in the project and delegates
+ * an incoming action to the correct one.
+ */
 const _reducer = (state, action) => {
   const { type } = action;
 
@@ -25,6 +19,11 @@ const _reducer = (state, action) => {
   }
 };
 
+/*
+ * A logger for in development logging every every event and relevant
+ * information such as state changes and action payload. Intentionally left on
+ * for production builds for easy introspection.
+ */
 const wrapDevLogger = (reducer) => {
   return (state, action) => {
     const newState = reducer(state, action);

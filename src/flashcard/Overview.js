@@ -12,6 +12,10 @@ const Flashcard = ({ id, prompt, solution }) => {
   );
 };
 
+/*
+ * The component displaying all the user's flashcards meant for studying before
+ * taking a quiz.
+ */
 const Flashcards = ({ flashcards, status, dispatch }) => {
   if (isLoading(status)) {
     return <span>Loading...</span>;

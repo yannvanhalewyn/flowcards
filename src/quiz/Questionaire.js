@@ -8,6 +8,10 @@ import * as Quiz from "./model";
 import * as QuizEvents from "./events";
 import * as Flashcard from "../flashcard/model";
 
+/*
+ * The progress dots above the current question representing progression through
+ * the quiz
+ */
 const Progress = ({ quiz, flashcardsById }) => {
   const report = Quiz.report(quiz, flashcardsById);
 
@@ -36,6 +40,9 @@ const Progress = ({ quiz, flashcardsById }) => {
   return <div className="">{map(Segment, quiz.questions)}</div>;
 };
 
+/*
+ * Renders wether the answer was correct and the solution if not.
+ */
 const AnswerAndSolution = ({ flashcard, answer }) => {
   const InlineIcon = ({ path, className }) => (
     <Icon
@@ -69,6 +76,9 @@ const AnswerAndSolution = ({ flashcard, answer }) => {
   );
 };
 
+/*
+ * The page you see after submitting an answer to a questoin.
+ */
 const QuestionReport = ({
   quiz,
   flashcard,
@@ -94,6 +104,9 @@ const QuestionReport = ({
   );
 };
 
+/*
+ * The form collecting user input to respond to a question.
+ */
 const QuestionInput = ({ onSubmit }) => {
   const [input, setInput] = useState("");
 
@@ -117,6 +130,9 @@ const QuestionInput = ({ onSubmit }) => {
   );
 };
 
+/*
+ * The entire questionaire flow component.
+ */
 const Questionaire = ({ currentQuiz, flashcardsById, dispatch }) => {
   const currentFlashcardId = currentQuiz.currentQuestion;
   const currentFlashcard = prop(currentFlashcardId, flashcardsById);
