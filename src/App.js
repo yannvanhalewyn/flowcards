@@ -5,6 +5,7 @@ import logo from "./logo.svg";
 import FlashcardsOverview from "./flashcard/Overview";
 import Quiz from "./quiz/Quiz";
 import { reducer } from "./state";
+import { resourcePath } from "./resource";
 import { makeLoader, useRemoteData, getData } from "./remote/events";
 
 const flashcardsLoader = makeLoader({
@@ -31,7 +32,7 @@ const Header = () => {
         <span className="text-sm">View source on</span>
         <img
           className="inline h-6 w-6 ml-2"
-          src="/img/github-logo.png"
+          src={resourcePath("/img/github-logo.png")}
           alt="Github Logo"
         />
       </a>

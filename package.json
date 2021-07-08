@@ -2,6 +2,7 @@
   "name": "flashcards",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://yannvanhalewyn.github.io/flowcards",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@mdi/js": "^5.9.55",

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { identity, path, assoc, assocPath, compose } from "ramda";
+import { resourcePath } from "../resource";
 
 /*
  * A loader is an object describing how data should be fetched and stored in the
@@ -13,7 +14,11 @@ import { identity, path, assoc, assocPath, compose } from "ramda";
  *                                     app state.
  */
 export const makeLoader = ({ endpoint, key, parseResponse }) => {
-  return { endpoint, key, parseResponse: parseResponse || identity };
+  return {
+    endpoint: resourcePath(endpoint),
+    key,
+    parseResponse: parseResponse || identity,
+  };
 };
 
 /*
@@ -73,7 +78,10 @@ export const reducers = {
  * Returns a tuple of [data, status] of the loader.
  */
 export const getData = (state, loader) => {
-  return [path([loader.key], state), path(["requestStatus", loader.key], state)];
+  return [
+    path([loader.key], state),
+    path(["requestStatus", loader.key], state),
+  ];
 };
 
 export const isLoading = (status) => status === "STATUS/LOADING";
