@@ -1,17 +1,18 @@
 import "./App.css";
-import Flashcards from "./views/Flashcards";
+import FlashcardsOverview from "./flashcard/Overview";
 import { useReducer } from "react";
-import * as R from "ramda";
+import { values, prop, compose, indexBy } from "ramda";
 
+import Quiz from "./quiz/Quiz";
 import { reducer } from "./state";
-import { makeLoader, useRemoteData, getStatus, getData } from "./events/remote";
+import { makeLoader, useRemoteData, getData } from "./remote/events";
 
 const flashcardsLoader = makeLoader({
   endpoint: "/flashcards.json",
   key: "userFlashcards",
   // Function that picks the flashcards key from response, then indexes the list
   // by their ID for easy access
-  parseResponse: R.compose(R.indexBy(R.prop("id")), R.prop("flashcards")),
+  parseResponse: compose(indexBy(prop("id")), prop("flashcards")),
 });
 
 const App = () => {
@@ -19,14 +20,24 @@ const App = () => {
 
   // Load flashcards into appstate when component mounts
   useRemoteData(flashcardsLoader, dispatch);
+  const [flashcardsById, status] = getData(state, flashcardsLoader);
 
   return (
     <div className="App">
       <span>FlowCards</span>
-      <Flashcards
-        flashcards={getData(state, flashcardsLoader)}
-        status={getStatus(state, flashcardsLoader)}
-      />
+      {state.currentQuiz ? (
+        <Quiz
+          flashcardsById={flashcardsById}
+          currentQuiz={state.currentQuiz}
+          dispatch={dispatch}
+        />
+      ) : (
+        <FlashcardsOverview
+          flashcards={values(flashcardsById)}
+          status={status}
+          dispatch={dispatch}
+        />
+      )}
     </div>
   );
 };

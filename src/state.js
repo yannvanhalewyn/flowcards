@@ -1,20 +1,23 @@
-import * as R from "ramda";
-import { reducers } from "./events/remote";
+import { prop, mergeAll } from "ramda";
+import { reducers as remoteReducers } from "./remote/events";
+import { reducers as quizReducers } from "./quiz/events";
 
 // APP STATE:
-// user_flashcards: { "uuid": "flashcard" }
+// userFlashcards: { "uuid": "flashcard" }
 //
-// quiz: {
+// currentQuiz: {
 //   questions: ["uuid", "uuid"]
 //   answers: {
 //     "uuid": "answer"
 //   }
 // }
 
+const allReducers = mergeAll([remoteReducers, quizReducers]);
+
 const _reducer = (state, action) => {
   const { type } = action;
 
-  const reducer = R.prop(type, reducers);
+  const reducer = prop(type, allReducers);
   if (reducer) {
     return reducer(state, action);
   } else {

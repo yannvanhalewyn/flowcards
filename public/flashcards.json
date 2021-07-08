@@ -2,38 +2,38 @@
   "flashcards": [
     {
       "id": "2dc2b791-7ad3-470b-b37c-a88527bcd0d7",
-      "prompt": "How much is it? ",
-      "solution": "Сколько стоит? (skol’ko STOit?)"
+      "prompt": "Сколько стоит? (skol’ko STOit?)",
+      "solution": "How much is it? "
     },
     {
       "id": "a8f99522-d910-4214-91c2-c003c6461e23",
-      "prompt": "Can I pay? ",
-      "solution": "Можно заплатить? (MOzhno zaplaTIT’?)"
+      "prompt": "Можно заплатить? (MOzhno zaplaTIT’?)",
+      "solution": "Can I pay? "
     },
     {
       "id": "dd0939da-3844-49f7-9218-a3d319907785",
-      "prompt": "Can I pay by credit card? ",
-      "solution": "Можно заплатить кредитной карточкой? (MOzhno zaplaTIT’ kreDItnoi KARtochkoi?)"
+      "prompt": "Можно заплатить кредитной карточкой? (MOzhno zaplaTIT’ kreDItnoi KARtochkoi?)",
+      "solution": "Can I pay by credit card? "
     },
     {
       "id": "d7352078-94cb-486c-a269-9244a5e52e4f",
-      "prompt": "Cash ",
-      "solution": "Наличные (naLICHnie)"
+      "prompt": "Наличные (naLICHnie)",
+      "solution": "Cash "
     },
     {
       "id": "0997a94c-52df-49a1-9317-579a4d00c498",
-      "prompt": "Bookstore ",
-      "solution": "Книжый магазин (KNIzhni magaZIN)"
+      "prompt": "Книжый магазин (KNIzhni magaZIN)",
+      "solution": "Bookstore "
     },
     {
       "id": "3161651a-9e2e-4ab0-9b16-a7f1f2569c37",
-      "prompt": "Supermarket ",
-      "solution": "супермаркет (superMARket)"
+      "prompt": "супермаркет (superMARket)",
+      "solution": "Supermarket "
     },
     {
       "id": "d52f62ab-4f8b-4005-97a0-3f39642c849c",
-      "prompt": "Bakery ",
-      "solution": "Булочная (BUlochnaya)"
+      "prompt": "Булочная (BUlochnaya)",
+      "solution": "Bakery "
     }
   ]
 }

@@ -14,7 +14,7 @@ import { identity, path, assoc, assocPath, compose } from "ramda";
  */
 export const makeLoader = ({ endpoint, key, parseResponse }) => {
   return { endpoint, key, parseResponse: parseResponse || identity };
-}
+};
 
 /*
  * A react side effect that orchestrates and dispatches data loading according
@@ -69,7 +69,8 @@ export const reducers = {
   },
 };
 
-export const getStatus = (state, loader) => path(["status", loader.key], state);
-export const getData = (state, loader) => path([loader.key], state);
+export const getData = (state, loader) => {
+  return [path([loader.key], state), path(["status", loader.key], state)];
+};
 export const isLoading = (status) => status === "STATUS/LOADING";
 export const isSuccess = (status) => status === "STATUS/SUCCESS";
