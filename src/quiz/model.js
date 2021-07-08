@@ -58,7 +58,7 @@ export const report = (quiz, flashcardsById) => {
       return append(assoc("answer", answer, flashcard), errors);
     },
     [],
-    quiz.questions
+    keys(quiz.answers)
   );
 
   const numberOfQuestions = length(quiz.questions);
