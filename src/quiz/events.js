@@ -1,6 +1,22 @@
 import { assoc, dissoc } from "ramda";
 import * as Quiz from "./model.js";
 
+////////////////////////////////////////////////////////////////////////////////
+// Action Creators
+
+export const start = (flashcards) => ({ type: "QUIZ/START", flashcards });
+export const answerQuestion = (flashcardId, answer) => ({
+  type: "QUIZ/ANSWER_QUESTION",
+  flashcardId,
+  answer,
+});
+export const nextQuestion = () => ({ type: "QUIZ/NEXT_QUESTION" });
+export const finish = () => ({ type: "QUIZ/FINISH" });
+export const close = () => ({ type: "QUIZ/CLOSE" });
+
+////////////////////////////////////////////////////////////////////////////////
+// Reducer
+
 export const reducers = {
   "QUIZ/START": (state, action) => {
     const { flashcards } = action;

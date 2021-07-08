@@ -56,21 +56,25 @@ export const useRemoteData = (loader, dispatch) => {
  */
 export const reducers = {
   "REMOTE/FETCH": (state, action) =>
-    assocPath(["status", action.key], "STATUS/LOADING", state),
+    assocPath(["requestStatus", action.key], "STATUS/LOADING", state),
 
   "REMOTE/ERROR": (state, action) =>
-    assocPath(["status", action.key], "STATUS/ERROR", state),
+    assocPath(["requestStatus", action.key], "STATUS/ERROR", state),
 
   "REMOTE/SUCCESS": (state, action) => {
     return compose(
       assoc(action.key, action.data),
-      assocPath(["status", action.key], "STATUS/SUCCESS")
+      assocPath(["requestStatus", action.key], "STATUS/SUCCESS")
     )(state);
   },
 };
 
+/*
+ * Returns a tuple of [data, status] of the loader.
+ */
 export const getData = (state, loader) => {
-  return [path([loader.key], state), path(["status", loader.key], state)];
+  return [path([loader.key], state), path(["requestStatus", loader.key], state)];
 };
+
 export const isLoading = (status) => status === "STATUS/LOADING";
 export const isSuccess = (status) => status === "STATUS/SUCCESS";

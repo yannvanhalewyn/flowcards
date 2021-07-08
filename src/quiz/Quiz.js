@@ -3,6 +3,7 @@ import { map, isEmpty } from "ramda";
 import Questionaire from "./Questionaire";
 import { AnswerAndSolution } from "./Questionaire";
 import * as Quiz from "./model";
+import * as QuizEvents from "./events"
 import { DashedHeading } from "../Typography";
 
 const ErrorLine = (error) => {
@@ -37,7 +38,7 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
       )}
       <button
         className="mt-4 underline text-blue-500"
-        onClick={() => dispatch({ type: "QUIZ/CLOSE" })}
+        onClick={() => dispatch(QuizEvents.close())}
       >
         ‹ Go back
       </button>

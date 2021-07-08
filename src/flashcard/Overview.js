@@ -21,8 +21,9 @@ const Flashcards = ({ flashcards, status, dispatch }) => {
         <DashedHeading>Study your cards</DashedHeading>
         <ul>{map(Flashcard, flashcards)}</ul>
         <div className="text-center mt-4">
-          <button className="btn btn--blue mx-auto"
-                  onClick={() => dispatch({ type: "QUIZ/START", flashcards })}
+          <button
+            className="btn btn--blue mx-auto"
+            onClick={() => dispatch(QuizEvents.start(flashcards))}
           >
             Take a Quiz!
           </button>

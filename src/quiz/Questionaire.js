@@ -4,8 +4,9 @@ import Icon from "@mdi/react";
 import { mdiCloseThick, mdiCheckBold } from "@mdi/js";
 import { prop, path, map, contains } from "ramda";
 
-import * as Quiz from "./model.js";
-import * as Flashcard from "../flashcard/model.js";
+import * as Quiz from "./model";
+import * as QuizEvents from "./events";
+import * as Flashcard from "../flashcard/model";
 
 const Progress = ({ quiz, flashcardsById }) => {
   const report = Quiz.report(quiz, flashcardsById);
@@ -131,17 +132,13 @@ const Questionaire = ({ currentQuiz, flashcardsById, dispatch }) => {
           quiz={currentQuiz}
           flashcard={currentFlashcard}
           answer={submittedAnswer}
-          onNextQuestion={() => dispatch({ type: "QUIZ/NEXT_QUESTION" })}
-          onFinishQuiz={() => dispatch({ type: "QUIZ/FINISH" })}
+          onNextQuestion={() => dispatch(QuizEvents.nextQuestion())}
+          onFinishQuiz={() => dispatch(QuizEvents.finish())}
         />
       ) : (
         <QuestionInput
           onSubmit={(answer) =>
-            dispatch({
-              type: "QUIZ/ANSWER_QUESTION",
-              flashcardId: currentFlashcardId,
-              answer,
-            })
+            dispatch(QuizEvents.answerQuestion(currentFlashcardId, answer))
           }
         />
       )}
