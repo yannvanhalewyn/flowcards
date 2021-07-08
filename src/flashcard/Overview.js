@@ -3,9 +3,9 @@ import { isLoading, isSuccess } from "../remote/events";
 
 const Flashcard = ({ id, prompt, solution }) => {
   return (
-    <li key={id}>
-      <span>{prompt}</span>
-      <span>{solution}</span>
+    <li className="mb-2 p-4 rounded bg-white" key={id}>
+      <p className="font-bold">{prompt}</p>
+      <p className="mt-1 italic text-gray-800">{solution}</p>
     </li>
   );
 };
@@ -15,13 +15,17 @@ const Flashcards = ({ flashcards, status, dispatch }) => {
     return <span>Loading...</span>;
   } else if (isSuccess(status)) {
     return (
-      <div>
-        <ul>{map(Flashcard, flashcards)}</ul>;
-        <button
-          onClick={() => dispatch({ type: "QUIZ/START", flashcards })}
-        >
-          Take a Quiz!
-        </button>
+      <div className="mt-4">
+        <h1 className="font-bold text-xl mb-2 text-center">Study your cards</h1>
+        <hr className="mb-4 border-2 border-dashed border-yellow-200"/>
+        <ul>{map(Flashcard, flashcards)}</ul>
+        <div className="text-center mt-4">
+          <button className="btn btn--blue mx-auto"
+                  onClick={() => dispatch({ type: "QUIZ/START", flashcards })}
+          >
+            Take a Quiz!
+          </button>
+        </div>
       </div>
     );
   }

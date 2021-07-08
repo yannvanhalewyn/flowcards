@@ -2,11 +2,18 @@
 @tailwind components;
 
 body {
-  margin: 0;
-  background-color: #fffdda;
+  @apply bg-yellow-300;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.btn {
+  @apply px-4 py-2 rounded font-bold;
+}
+
+.btn--blue {
+  @apply bg-blue-500 hover:bg-blue-400 text-white;
 }
 
 @tailwind utilities;
