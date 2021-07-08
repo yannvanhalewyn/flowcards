@@ -1,5 +1,9 @@
+body {
+  background-color: #fffdda;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -14,7 +18,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #fffdda;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +39,33 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.mt-8 {
+  margin-top: 2em;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-8 {
+  padding: 2em;
+}
+
+.flashcard {
+  background: white;
+  width: 80%;
+  border-left: 4px solid red;
+}
+
+.flashcard__prompt {
+  display: block;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.flashcard__input {
+
 }
