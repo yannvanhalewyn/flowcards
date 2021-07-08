@@ -13,10 +13,13 @@ const Progress = ({ quiz, flashcardsById }) => {
   const Segment = (questionId) => {
     let color;
 
+    // No recorded answer
     if (!path(["answers", questionId], quiz)) {
       color = "bg-gray-200";
+      // Answer was wrong!
     } else if (contains(questionId, map(prop("id"), report.errors))) {
       color = "bg-red-500";
+      // Answer was correct
     } else {
       color = "bg-green-500";
     }
@@ -31,7 +34,7 @@ const Progress = ({ quiz, flashcardsById }) => {
   return <div className="">{map(Segment, quiz.questions)}</div>;
 };
 
-export const AnswerReport = ({ flashcard, answer }) => {
+const AnswerAndSolution = ({ flashcard, answer }) => {
   const InlineIcon = ({ path, className }) => (
     <Icon
       className={`inline-block -mt-1 mr-2 w-5 h-5 ${className}`}
@@ -75,7 +78,7 @@ const QuestionReport = ({
 
   return (
     <div className="mt-4">
-      <AnswerReport flashcard={flashcard} answer={answer} />
+      <AnswerAndSolution flashcard={flashcard} answer={answer} />
       {nextQuestion ? (
         <button className="btn btn--blue mt-4" onClick={onNextQuestion}>
           Next Question
@@ -147,3 +150,4 @@ const Questionaire = ({ currentQuiz, flashcardsById, dispatch }) => {
 };
 
 export default Questionaire;
+export { AnswerAndSolution };

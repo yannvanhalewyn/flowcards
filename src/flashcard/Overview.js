@@ -1,6 +1,7 @@
 import { map } from "ramda";
 import { isLoading, isSuccess } from "../remote/events";
 import { DashedHeading } from "../Typography";
+import * as QuizEvents from "../quiz/events";
 
 const Flashcard = ({ id, prompt, solution }) => {
   return (

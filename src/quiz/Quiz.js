@@ -1,8 +1,8 @@
 import React from "react";
 import { map, isEmpty } from "ramda";
 import Questionaire from "./Questionaire";
-import { AnswerReport } from "./Questionaire";
-import * as Quiz from "./model.js";
+import { AnswerAndSolution } from "./Questionaire";
+import * as Quiz from "./model";
 import { DashedHeading } from "../Typography";
 
 const ErrorLine = (error) => {
@@ -10,7 +10,7 @@ const ErrorLine = (error) => {
     <li key={error.id} className="mt-6 border-l-4 pl-4 border-yellow-300">
       <h2 className="text-xl font-bold">{error.prompt}</h2>
       <div className="mt-2">
-        <AnswerReport flashcard={error} answer={error.answer} />
+        <AnswerAndSolution flashcard={error} answer={error.answer} />
       </div>
     </li>
   );
