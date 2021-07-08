@@ -1,12 +1,12 @@
 import { map } from "ramda";
-import { isLoading, isSuccess } from "../events/remote";
+import { isLoading, isSuccess } from "../remote/events";
 
 const Flashcard = ({ id, prompt, solution }) => {
   return (
-    <div key={id}>
+    <li key={id}>
       <span>{prompt}</span>
       <span>{solution}</span>
-    </div>
+    </li>
   );
 };
 

@@ -1,4 +1,4 @@
-import { assoc } from "ramda";
+import { assoc, dissoc } from "ramda";
 import * as Quiz from "./model.js";
 
 export const reducers = {
@@ -17,6 +17,18 @@ export const reducers = {
   },
 
   "QUIZ/NEXT_QUESTION": (state, action) => {
-    return assoc("currentQuiz", Quiz.nextQuestion(state.currentQuiz), state);
+    return assoc(
+      "currentQuiz",
+      Quiz.advanceToNextQuestion(state.currentQuiz),
+      state
+    );
+  },
+
+  "QUIZ/FINISH": (state, action) => {
+    return assoc("currentQuiz", Quiz.finish(state.currentQuiz), state);
+  },
+
+  "QUIZ/CLOSE": (state, action) => {
+    return dissoc("currentQuiz", state);
   },
 };
