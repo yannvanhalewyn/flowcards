@@ -1,12 +1,16 @@
 import React from "react";
 import { map, isEmpty } from "ramda";
 import Questionaire from "./Questionaire";
+import { AnswerReport } from "./Questionaire";
 import * as Quiz from "./model.js";
 
 const ErrorLine = (error) => {
   return (
-    <li key={error.id}>
-      {error.answer} => {error.solution}
+    <li key={error.id} className="mt-6 border-l-4 pl-4 border-yellow-300">
+      <h2 className="text-xl font-bold">{error.prompt}</h2>
+      <div className="mt-2">
+        <AnswerReport flashcard={error} answer={error.answer} />
+      </div>
     </li>
   );
 };
@@ -16,27 +20,33 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
   const [num, denom] = report.score;
 
   return (
-    <div>
-      <h1>Congratulations!</h1>
-      <p>
-        You have finished the quiz. Your score was: {num} out of {denom}!
+    <div className="mt-8 p-8 bg-white rounded">
+      <h1 className="font-bold text-xl">All done!</h1>
+      <p className="mt-4 text-gray-800">
+        You have finished the quiz. Your score was{" "}
+        <span className="font-bold">{num}</span> out of{" "}
+        <span className="font-bold">{denom}</span>!
       </p>
       {isEmpty(report.errors) ? (
-        <p>You didn't make a single mistake!</p>
+        <p className="mt-2 font-bold text-green-500">
+          You didn't make a single mistake!
+        </p>
       ) : (
-        <React.Fragment>
-          <p>You made these mistakes:</p>
-          <ul>{map(ErrorLine, report.errors)}</ul>
-        </React.Fragment>
+        <ul className="mt-2">{map(ErrorLine, report.errors)}</ul>
       )}
-      <button onClick={() => dispatch({ type: "QUIZ/CLOSE" })}>Go back</button>
+      <button
+        className="mt-4 underline text-blue-500"
+        onClick={() => dispatch({ type: "QUIZ/CLOSE" })}
+      >
+        ‹ Go back
+      </button>
     </div>
   );
 };
 
 const QuizComponent = (props) => {
   const { currentQuiz } = props;
-  // currentQuiz.isFinished = true;
+
   if (currentQuiz.isFinished) {
     return <QuizReport {...props} />;
   }

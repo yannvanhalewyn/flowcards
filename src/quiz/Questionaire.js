@@ -6,6 +6,39 @@ import { prop, path } from "ramda";
 import * as Quiz from "./model.js";
 import * as Flashcard from "../flashcard/model.js";
 
+export const AnswerReport = ({ flashcard, answer }) => {
+  const InlineIcon = ({ path, className }) => (
+    <Icon
+      className={`inline-block -mt-1 mr-2 w-5 h-5 ${className}`}
+      path={path}
+    />
+  );
+
+  if (Flashcard.isCorrect(flashcard, answer)) {
+    return (
+      <p>
+        <InlineIcon className="text-green-500" path={mdiCheckBold} />
+        <span className="font-bold text-green-500">Correct!</span>
+      </p>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      <p className="text-gray-700">
+        <InlineIcon className="text-green-500" path={mdiCheckBold} />
+        The correct answer was{" "}
+        <span className="font-bold text-green-500"> {flashcard.solution} </span>
+      </p>
+
+      <p className="mt-2">
+        <InlineIcon path={mdiCloseThick} className="text-red-500" />
+        You replied <span className="font-bold text-red-500">{answer}</span>
+      </p>
+    </React.Fragment>
+  );
+};
+
 const QuestionReport = ({
   quiz,
   flashcard,
@@ -15,37 +48,9 @@ const QuestionReport = ({
 }) => {
   const nextQuestion = Quiz.getNextQuestion(quiz);
 
-  const InlineIcon = ({ path, className }) => (
-    <Icon
-      className={`inline-block -mt-1 mr-2 w-5 h-5 ${className}`}
-      path={path}
-    />
-  );
-
   return (
     <div className="mt-4">
-      {Flashcard.isCorrect(flashcard, answer) ? (
-        <p>
-          <InlineIcon className="text-green-500" path={mdiCheckBold} />
-          <span className="font-bold text-green-500">Correct!</span>
-        </p>
-      ) : (
-        <React.Fragment>
-          <p className="text-gray-700">
-            <InlineIcon className="text-green-500" path={mdiCheckBold} />
-            The correct answer was{" "}
-            <span className="font-bold text-green-500">
-              {" "}
-              {flashcard.solution}{" "}
-            </span>
-          </p>
-
-          <p className="mt-2">
-            <InlineIcon path={mdiCloseThick} className="text-red-500" />
-            You replied <span className="font-bold text-red-500">{answer}</span>
-          </p>
-        </React.Fragment>
-      )}
+      <AnswerReport flashcard={flashcard} answer={answer} />
       {nextQuestion ? (
         <button className="btn btn--blue mt-4" onClick={onNextQuestion}>
           Next Question
