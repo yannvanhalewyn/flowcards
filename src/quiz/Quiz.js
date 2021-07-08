@@ -22,7 +22,7 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
   const [num, denom] = report.score;
 
   return (
-    <div className="mt-8 p-8 bg-white rounded">
+    <div className="mt-8 p-8 bg-white rounded animation-appear">
       <h1 className="font-bold text-xl">All done!</h1>
       <p className="mt-4 text-gray-800">
         You have finished the quiz. Your score was{" "}

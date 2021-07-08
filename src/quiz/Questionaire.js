@@ -122,7 +122,7 @@ const Questionaire = ({ currentQuiz, flashcardsById, dispatch }) => {
   const submittedAnswer = path(["answers", currentFlashcardId], currentQuiz);
 
   return (
-    <div className="mt-8 p-8 bg-white rounded">
+    <div className="mt-8 p-8 bg-white rounded animation-appear">
       <Progress quiz={currentQuiz} flashcardsById={flashcardsById} />
       <h2 className="inline-block mt-8 font-bold text-xl border-l-4 pl-4 border-yellow-300">
         {currentFlashcard.prompt}

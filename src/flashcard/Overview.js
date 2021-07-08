@@ -17,7 +17,7 @@ const Flashcards = ({ flashcards, status, dispatch }) => {
     return <span>Loading...</span>;
   } else if (isSuccess(status)) {
     return (
-      <div className="mt-4">
+      <div className="mt-4 animation-appear">
         <DashedHeading>Study your cards</DashedHeading>
         <ul>{map(Flashcard, flashcards)}</ul>
         <div className="text-center mt-4">
