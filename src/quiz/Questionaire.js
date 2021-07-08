@@ -94,7 +94,13 @@ const QuestionInput = ({ onSubmit }) => {
 
   return (
     <React.Fragment>
-      <form className="mt-8" onSubmit={() => onSubmit(input)}>
+      <form
+        className="mt-8"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input) onSubmit(input);
+        }}
+      >
         <input
           className="border-b-2 w-full outline-none border-gray-200"
           type="text"
