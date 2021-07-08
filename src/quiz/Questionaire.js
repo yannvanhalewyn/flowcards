@@ -27,6 +27,7 @@ const Progress = ({ quiz, flashcardsById }) => {
 
     return (
       <span
+        key={questionId}
         className={`inline-block w-4 h-4 mr-3 rounded-full ${color}`}
       ></span>
     );
