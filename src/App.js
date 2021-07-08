@@ -30,7 +30,7 @@ const Header = () => {
       >
         <span className="text-sm">View source on</span>
         <img
-          className="inline h-8 w-8 ml-4"
+          className="inline h-6 w-6 ml-2"
           src="/img/github-logo.png"
           alt="Github Logo"
         />

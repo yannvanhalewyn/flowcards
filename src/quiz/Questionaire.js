@@ -1,11 +1,35 @@
 import { useState } from "react";
 import React from "react";
 import Icon from "@mdi/react";
-import { mdiCloseThick, mdiCheck, mdiCheckBold } from "@mdi/js";
-import { prop, path } from "ramda";
+import { mdiCloseThick, mdiCheckBold } from "@mdi/js";
+import { prop, path, map, contains } from "ramda";
 
 import * as Quiz from "./model.js";
 import * as Flashcard from "../flashcard/model.js";
+
+const Progress = ({ quiz, flashcardsById }) => {
+  const report = Quiz.report(quiz, flashcardsById);
+
+  const Segment = (questionId) => {
+    let color;
+
+    if (!path(["answers", questionId], quiz)) {
+      color = "bg-gray-200";
+    } else if (contains(questionId, map(prop("id"), report.errors))) {
+      color = "bg-red-500";
+    } else {
+      color = "bg-green-500";
+    }
+
+    return (
+      <span
+        className={`inline-block w-4 h-4 mr-3 rounded-full ${color}`}
+      ></span>
+    );
+  };
+
+  return <div className="">{map(Segment, quiz.questions)}</div>;
+};
 
 export const AnswerReport = ({ flashcard, answer }) => {
   const InlineIcon = ({ path, className }) => (
@@ -89,7 +113,8 @@ const Questionaire = ({ currentQuiz, flashcardsById, dispatch }) => {
 
   return (
     <div className="mt-8 p-8 bg-white rounded">
-      <h2 className="inline-block font-bold text-xl border-l-4 pl-4 border-yellow-300">
+      <Progress quiz={currentQuiz} flashcardsById={flashcardsById} />
+      <h2 className="inline-block mt-8 font-bold text-xl border-l-4 pl-4 border-yellow-300">
         {currentFlashcard.prompt}
       </h2>
       {submittedAnswer ? (
