@@ -1,4 +1,3 @@
-import "./App.css";
 import FlashcardsOverview from "./flashcard/Overview";
 import { useReducer } from "react";
 import { values, prop, compose, indexBy } from "ramda";
