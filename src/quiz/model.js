@@ -12,6 +12,7 @@ import {
   append,
   path,
   length,
+  apply,
 } from "ramda";
 import { atom, selector, useRecoilState } from "recoil";
 
@@ -132,28 +133,37 @@ export const currentQuizReport = selector({
 ////////////////////////////////////////////////////////////////////////////////
 // Mutations
 
-export const useNewQuizMutation = () => {
-  const [, setCurrentQuiz] = useRecoilState(currentQuizAtom);
-  return (flashcards) => setCurrentQuiz(make(flashcards));
+/*
+ * An abstraction around a hook that will use a recoil state to perform an
+ * update transformation and persist it back. The mutator can receive any
+ * arbitrary number of arguments. The update function should be of type:
+ * f(oldValue, ...nArgs) -> newValue.
+ *
+ * This abstraction is generic and can be re-used if put in proper namespace.
+ */
+const makeLocalMutator = (atom, f) => () => {
+  const [value, setValue] = useRecoilState(atom);
+  return (...args) => setValue(apply(f, [value, ...args]));
 };
 
-export const useSubmitAnswerMutation = () => {
-  const [currentQuiz, setCurrentQuiz] = useRecoilState(currentQuizAtom);
-  return (questionId, answer) =>
-    setCurrentQuiz(setAnswer(currentQuiz, questionId, answer));
-};
+export const useNewQuizMutation = makeLocalMutator(
+  currentQuizAtom,
+  (quiz, flashcards) => make(flashcards)
+);
 
-export const useAdvanceToNextQuestionMutation = () => {
-  const [currentQuiz, setCurrentQuiz] = useRecoilState(currentQuizAtom);
-  return () => setCurrentQuiz(advanceToNextQuestion(currentQuiz));
-};
+export const useSubmitAnswerMutation = makeLocalMutator(
+  currentQuizAtom,
+  setAnswer
+);
 
-export const useFinishQuizMutation = () => {
-  const [currentQuiz, setCurrentQuiz] = useRecoilState(currentQuizAtom);
-  return () => setCurrentQuiz(finish(currentQuiz));
-};
+export const useAdvanceToNextQuestionMutation = makeLocalMutator(
+  currentQuizAtom,
+  advanceToNextQuestion
+);
 
-export const useCloseQuizMutation = () => {
-  const [, setCurrentQuiz] = useRecoilState(currentQuizAtom);
-  return () => setCurrentQuiz(null);
-};
+export const useFinishQuizMutation = makeLocalMutator(currentQuizAtom, finish);
+
+export const useCloseQuizMutation = makeLocalMutator(
+  currentQuizAtom,
+  () => null
+);
