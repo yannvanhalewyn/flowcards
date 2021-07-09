@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import Icon from "@mdi/react";
 import { mdiCloseThick, mdiCheckBold } from "@mdi/js";
 import { prop, path, map, contains } from "ramda";
@@ -61,7 +60,7 @@ const AnswerAndSolution = ({ flashcard, answer }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <p className="text-gray-700">
         <InlineIcon className="text-green-500" path={mdiCheckBold} />
         The correct answer was{" "}
@@ -72,7 +71,7 @@ const AnswerAndSolution = ({ flashcard, answer }) => {
         <InlineIcon path={mdiCloseThick} className="text-red-500" />
         You replied <span className="font-bold text-red-500">{answer}</span>
       </p>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -111,7 +110,7 @@ const QuestionInput = ({ onSubmit }) => {
   const [input, setInput] = useState("");
 
   return (
-    <React.Fragment>
+    <>
       <form
         className="mt-8"
         onSubmit={(e) => {
@@ -122,11 +121,11 @@ const QuestionInput = ({ onSubmit }) => {
         <input
           className="border-b-2 w-full outline-none border-gray-200"
           type="text"
-          autoFocus={true}
+          focus={true}
           onChange={(e) => setInput(e.target.value)}
         />
       </form>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -1,9 +1,8 @@
-import React from "react";
 import { map, isEmpty } from "ramda";
 import Questionaire from "./Questionaire";
 import { AnswerAndSolution } from "./Questionaire";
 import * as Quiz from "./model";
-import * as QuizEvents from "./events"
+import * as QuizEvents from "./events";
 import { DashedHeading } from "../Typography";
 
 /*
@@ -60,17 +59,17 @@ const QuizComponent = (props) => {
 
   if (currentQuiz.isFinished) {
     return (
-      <div className="mt-4">
+      <>
         <DashedHeading>See your results</DashedHeading>
         <QuizReport {...props} />
-      </div>
+      </>
     );
   }
   return (
-    <div className="mt-4">
+    <>
       <DashedHeading>Take the quiz</DashedHeading>
       <Questionaire {...props} />;
-    </div>
+    </>
   );
 };
 
