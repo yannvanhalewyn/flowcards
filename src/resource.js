@@ -1,6 +1,5 @@
-export const resourcePath = (path) => {
-  if (process.env.NODE_ENV === "development") {
-    return path;
-  }
-  return process.env.PUBLIC_URL + path;
-}
+/*
+ * Uses the projects "homepage" attribute from package.json ("/flowcards") in
+ * order to support Github Pages root URL being on ...github.io/flowcards/<asset>
+ */
+export const resourcePath = (path) => process.env.PUBLIC_URL + path;
