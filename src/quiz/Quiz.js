@@ -1,8 +1,9 @@
 import { map, isEmpty } from "ramda";
+import { useRecoilValue } from "recoil";
+
 import Questionaire from "./Questionaire";
 import { AnswerAndSolution } from "./Questionaire";
 import * as Quiz from "./model";
-import * as QuizEvents from "./events";
 import { DashedHeading } from "../Typography";
 
 /*
@@ -22,8 +23,9 @@ const ErrorLine = (error) => {
 /*
  * After completing a quiz renders the score and any errors made.
  */
-const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
-  const report = Quiz.report(currentQuiz, flashcardsById);
+const QuizReport = () => {
+  const report = useRecoilValue(Quiz.currentQuizReport);
+  const closeQuiz = Quiz.useCloseQuizMutation();
   const [num, denom] = report.score;
 
   return (
@@ -42,10 +44,10 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
         <ul className="mt-2">{map(ErrorLine, report.errors)}</ul>
       )}
       <button
-        className="mt-4 underline text-blue-500"
-        onClick={() => dispatch(QuizEvents.close())}
+        className="mt-4 underline text-blue-500 hover:text-blue-400"
+        onClick={closeQuiz}
       >
-        ‹ Go back
+        ← Go back
       </button>
     </div>
   );
@@ -54,21 +56,18 @@ const QuizReport = ({ currentQuiz, flashcardsById, dispatch }) => {
 /*
  * The main quiz component with questionnaire and report.
  */
-const QuizComponent = (props) => {
-  const { currentQuiz } = props;
+const QuizComponent = () => {
+  const quiz = useRecoilValue(Quiz.currentQuizAtom);
 
-  if (currentQuiz.isFinished) {
-    return (
-      <>
-        <DashedHeading>See your results</DashedHeading>
-        <QuizReport {...props} />
-      </>
-    );
-  }
-  return (
+  return quiz.isFinished ? (
+    <>
+      <DashedHeading>See your results</DashedHeading>
+      <QuizReport />
+    </>
+  ) : (
     <>
       <DashedHeading>Take the quiz</DashedHeading>
-      <Questionaire {...props} />;
+      <Questionaire />;
     </>
   );
 };
